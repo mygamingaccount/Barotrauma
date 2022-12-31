@@ -87,7 +87,7 @@ namespace Barotrauma.Items.Components
             }
         }
 
-        public float CurrentStress => Math.Abs((force / 100.0f) * (MinVoltage <= 0.0f ? 1.0f : Math.Min(prevVoltage, 1.0f)));
+        public float CurrentStress => Math.Abs((force / 100.0f) * Math.Min(prevVoltage,MaxOverVoltageFactor));
     
         private const float TinkeringForceIncrease = 1.5f;
 
