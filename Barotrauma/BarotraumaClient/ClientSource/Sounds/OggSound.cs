@@ -13,7 +13,8 @@ namespace Barotrauma.Sounds
         public long MaxStreamSamplePos => streamReader == null ? 0 : streamReader.TotalSamples * streamReader.Channels * 2;
 
         private List<float> playbackAmplitude;
-        private const int AMPLITUDE_SAMPLE_COUNT = 4410; //100ms in a 44100hz file
+        private const int AMPLITUDE_SAMPLE_COUNT = 4800; //100ms in a 48000hz file
+
 
         private short[] sampleBuffer = Array.Empty<short>();
         private short[] muffleBuffer = Array.Empty<short>();
