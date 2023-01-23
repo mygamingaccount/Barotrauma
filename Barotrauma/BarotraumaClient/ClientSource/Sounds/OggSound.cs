@@ -14,7 +14,7 @@ namespace Barotrauma.Sounds
         private static readonly Dictionary<int, BiQuad> muffleFilters = new Dictionary<int, BiQuad>();
 
         private static List<float> playbackAmplitude;
-        private const int AMPLITUDE_SAMPLE_COUNT = 4410; //100ms in a 44100hz file
+        private const int AMPLITUDE_SAMPLE_COUNT = 4800; //100ms in a 48000hz file
 
         public OggSound(SoundManager owner, string filename, bool stream, XElement xElement) : base(owner, filename, stream, true, xElement) { }
 

@@ -300,7 +300,7 @@ namespace Barotrauma.Sounds
 
             Disconnected = false;
 
-            int[] alcContextAttrs = new int[] { };
+            int[] alcContextAttrs = new int[] { Alc.Frequency, 48000 };
             alcContext = Alc.CreateContext(alcDevice, alcContextAttrs);
             if (alcContext == null)
             {
