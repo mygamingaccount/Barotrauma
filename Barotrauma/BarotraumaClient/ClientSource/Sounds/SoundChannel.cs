@@ -80,7 +80,7 @@ namespace Barotrauma.Sounds
 
     class SoundChannel : IDisposable
     {
-        private const int STREAM_BUFFER_SIZE = 8820;
+        private const int STREAM_BUFFER_SIZE = 9600;
         private readonly short[] streamShortBuffer;
 
         private string debugName = "SoundChannel";
