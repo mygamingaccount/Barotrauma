@@ -1039,6 +1039,11 @@ namespace Barotrauma
             if (filterOffensive.Selected)
             {
                 if (ForbiddenWordFilter.IsForbidden(serverInfo.ServerName)) { return false; }
+
+                foreach (var contentPackage in serverInfo.ContentPackages)
+                {
+                    if (ForbiddenWordFilter.IsForbidden(contentPackage.Name)) { return false; }
+                }
             }
 
             if (filterKarmaValue != TernaryOption.Any)
