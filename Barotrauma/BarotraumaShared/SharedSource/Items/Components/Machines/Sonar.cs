@@ -34,7 +34,7 @@ namespace Barotrauma.Items.Components
             }
         }
 
-        private const float DirectionalPingSector = 30.0f;
+        private const float DirectionalPingSector = 60.0f;
         private static readonly float DirectionalPingDotProduct;
 
         static Sonar()
