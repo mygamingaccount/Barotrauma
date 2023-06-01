@@ -556,18 +556,6 @@ namespace Barotrauma
             }
 
             if ((prevSize == 1.0f && chatBox.BarScroll == 0.0f) || (prevSize < 1.0f && chatBox.BarScroll == 1.0f)) { chatBox.BarScroll = 1.0f; }
-
-            GUISoundType soundType = GUISoundType.ChatMessage;
-            if (message.Type == ChatMessageType.Radio)
-            {
-                soundType = GUISoundType.RadioMessage;
-            }
-            else if (message.Type == ChatMessageType.Dead)
-            {
-                soundType = GUISoundType.DeadMessage;
-            }
-
-            SoundPlayer.PlayUISound(soundType);
         }
 
         public void SetVisibility(bool visible)
