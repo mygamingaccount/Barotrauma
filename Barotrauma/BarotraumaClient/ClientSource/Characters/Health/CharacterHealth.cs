@@ -750,8 +750,7 @@ namespace Barotrauma
 
             UpdateStatusHUD(deltaTime);
 
-            if (PlayerInput.KeyHit(InputType.Health) && GUI.KeyboardDispatcher.Subscriber == null &&
-                Character.Controlled.AllowInput && !toggledThisFrame)
+            if (PlayerInput.KeyHit(InputType.Health) && GUI.KeyboardDispatcher.Subscriber == null && !toggledThisFrame)
             {
                 if (openHealthWindow != null)
                 {
@@ -926,11 +925,6 @@ namespace Barotrauma
 
             if (OpenHealthWindow == this)
             {
-                if (Character == Character.Controlled && !Character.AllowInput)
-                {
-                    openHealthWindow = null;
-                }
-
                 if (Inventory.DraggingItems.Any())
                 {
                     if (highlightedLimbIndex > -1)
@@ -949,7 +943,7 @@ namespace Barotrauma
             }
 
             healthBarHolder.CanBeFocused = healthBar.CanBeFocused = healthBarShadow.CanBeFocused = !Character.ShouldLockHud();
-            if (Character.AllowInput && UseHealthWindow && !Character.DisableHealthWindow && healthBar.Enabled && healthBar.CanBeFocused &&
+            if (UseHealthWindow && !Character.DisableHealthWindow && healthBar.Enabled && healthBar.CanBeFocused &&
                 (GUI.IsMouseOn(healthBar) || GUI.MouseOn?.UserData is AfflictionPrefab) && Inventory.SelectedSlot == null)
             {
                 healthBar.State = GUIComponent.ComponentState.Hover;
