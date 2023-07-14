@@ -561,8 +561,7 @@ namespace Barotrauma.Items.Components
 
             if (!AutoPilot)
             {
-                //map input from rectangle to circle
-                Vector2 steeringInputPos = MapSquareToCircle(steeringInput / 100f) * 100.0f; 
+                Vector2 steeringInputPos = steeringInput * 2f;
                 steeringInputPos.Y = -steeringInputPos.Y;
                 steeringInputPos += steeringOrigin;
 
@@ -617,9 +616,7 @@ namespace Barotrauma.Items.Components
                     }
                 }
             }
-            
-            //map velocity from rectangle to circle
-            Vector2 steeringPos = MapSquareToCircle(targetVelocity / 100f) * 90.0f; 
+            Vector2 steeringPos = targetVelocity * 1.8f;
             steeringPos.Y = -steeringPos.Y;
             steeringPos += steeringOrigin;
 
@@ -821,7 +818,7 @@ namespace Barotrauma.Items.Components
                     }
                     else
                     {
-                        SteeringInput = inputPos;
+                        SteeringInput = inputPos / 2f;
                     }
                     unsentChanges = true;
                     user = Character.Controlled;
