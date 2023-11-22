@@ -42,6 +42,7 @@ namespace Barotrauma.Items.Components
         private readonly Color[] temperatureColors = new Color[] { Color.Blue, Color.LightBlue, Color.Orange, Color.Red };
         private Color outputColor = Color.Goldenrod;
         private Color loadColor = Color.LightSteelBlue;
+        private Color outputSetpointColor = Color.LightSlateGray;
 
         private RoundSound temperatureBoostSoundUp, temperatureBoostSoundDown;
         private GUIButton temperatureBoostUpButton, temperatureBoostDownButton;
@@ -52,6 +53,7 @@ namespace Barotrauma.Items.Components
 
         private readonly float[] outputGraph = new float[GraphSize];
         private readonly float[] loadGraph = new float[GraphSize];
+        private readonly float[] outputSetpointGraph = new float[GraphSize];
         
         private GUITickBox criticalHeatWarning;
         private GUITickBox lowTemperatureWarning;
@@ -551,6 +553,8 @@ namespace Barotrauma.Items.Components
             Rectangle graphRect = new Rectangle(container.Rect.X, container.Rect.Y, container.Rect.Width, container.Rect.Height - (int)(5 * GUI.yScale));
             DrawGraph(outputGraph, spriteBatch, graphRect, Math.Max(10000.0f, maxLoad), xOffset, outputColor);
             DrawGraph(loadGraph, spriteBatch, graphRect, Math.Max(10000.0f, maxLoad), xOffset, loadColor);
+            if (signalControlledTargetTurbineOutput.HasValue)
+                DrawGraph(outputSetpointGraph, spriteBatch, graphRect, Math.Max(10000.0f, maxLoad), xOffset, outputSetpointColor);
         }
 
         private void UpdateGraph(float deltaTime)
@@ -561,6 +565,14 @@ namespace Barotrauma.Items.Components
             {
                 UpdateGraph(outputGraph, -currPowerConsumption);
                 UpdateGraph(loadGraph, Load);
+                if (signalControlledTargetTurbineOutput.HasValue)
+                {
+                    UpdateGraph(outputSetpointGraph, maxPowerOutput * signalControlledTargetTurbineOutput.Value / 100.0f);
+                }
+                else
+                {
+                    Array.Clear(outputSetpointGraph);
+                }
 
                 graphTimer = 0.0f;
             }
