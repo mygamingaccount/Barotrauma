@@ -17,9 +17,9 @@ namespace Barotrauma.Items.Components
         private GUITickBox powerLight;
         private GUITickBox autoTempLight;
 
-        private const int GraphSize = 25;
+        private const int GraphSize = 250;
         private float graphTimer;
-        private readonly int updateGraphInterval = 500;
+        private readonly int updateGraphInterval = 50;
         
         private Sprite fissionRateMeter, turbineOutputMeter;
         private Sprite meterPointer;
