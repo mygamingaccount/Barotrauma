@@ -557,7 +557,14 @@ namespace Barotrauma.Items.Components
             if (graphTimer > updateGraphInterval)
             {
                 UpdateGraph(outputGraph, -currPowerConsumption);
-                UpdateGraph(loadGraph, Load);
+                if (signalControlledTargetTurbineOutput.HasValue)
+                {
+                    UpdateGraph(loadGraph, maxPowerOutput * signalControlledTargetTurbineOutput.Value / 100.0f);
+                }
+                else
+                {
+                    UpdateGraph(loadGraph, Load);
+                }
 
                 graphTimer = 0.0f;
             }
