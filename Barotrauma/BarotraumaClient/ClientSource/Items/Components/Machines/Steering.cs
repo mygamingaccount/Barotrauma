@@ -616,13 +616,20 @@ namespace Barotrauma.Items.Components
                     }
                 }
             }
-            Vector2 steeringPos = targetVelocity * 1.8f;
-            steeringPos.Y = -steeringPos.Y;
-            steeringPos += steeringOrigin;
+            Vector2 vel = controlledSub == null ? Vector2.Zero : controlledSub.Velocity;
+            Vector2 realWorldVel = ConvertUnits.ToDisplayUnits(vel * Physics.DisplayToRealWorldRatio);
+
+            // scale Y so 36km/h or 10m/s fits in the 200px square box, that is the fastest it can go
+            // TODO: scale X to the max speed of the sub per the player's helm skill
+            // max speed m/s = 10 * sqrt(sum(thrust)/submarineBody.Mass) * sqrt(6*sqrt(helmskill)+10/3))
+            Vector2 scaleVector = new Vector2(velRect.Width / 20f, -velRect.Width / 20f);
+            Vector2 headingPos = realWorldVel * scaleVector * sonar.Zoom * 0.7f;
+            headingPos = headingPos.ClampLength(velRect.Width / 2);
+            headingPos += steeringOrigin;
 
             if (steeringIndicator != null)
             {
-                Vector2 dir = steeringPos - steeringOrigin;
+                Vector2 dir = headingPos - steeringOrigin;
                 float angle = (float)Math.Atan2(dir.Y, dir.X);
                 steeringIndicator.Draw(spriteBatch, steeringOrigin, Color.Gray, origin: steeringIndicator.Origin, rotate: angle,
                     scale: new Vector2(dir.Length() / steeringIndicator.size.X, 0.7f));
@@ -631,7 +638,7 @@ namespace Barotrauma.Items.Components
             {
                 GUI.DrawLine(spriteBatch,
                     steeringOrigin,
-                    steeringPos,
+                    headingPos,
                     Color.CadetBlue, 0, 2);
             }           
         }
