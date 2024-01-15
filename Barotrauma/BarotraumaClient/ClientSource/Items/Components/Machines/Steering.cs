@@ -819,13 +819,17 @@ namespace Barotrauma.Items.Components
                     inputPos.Y = -inputPos.Y;
                     if (AutoPilot && !LevelStartSelected && !LevelEndSelected)
                     {
+                        if (PlayerInput.KeyDown(InputType.Crouch)) inputPos = Vector2.Zero;
                         posToMaintain = controlledSub != null ? 
                             controlledSub.WorldPosition + inputPos / sonar.DisplayRadius * sonar.Range / sonar.Zoom :
                             item.Submarine == null ? item.WorldPosition : item.Submarine.WorldPosition;
                     }
                     else
                     {
-                        SteeringInput = inputPos / 2f;
+                        if (!PlayerInput.KeyDown(InputType.Crouch))
+                            SteeringInput = inputPos / 2f;
+                        else
+                            SteeringInput = Vector2.Zero;
                     }
                     unsentChanges = true;
                     user = Character.Controlled;
