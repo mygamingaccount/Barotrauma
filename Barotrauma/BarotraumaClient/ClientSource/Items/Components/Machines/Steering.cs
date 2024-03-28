@@ -845,7 +845,7 @@ namespace Barotrauma.Items.Components
                 if (PlayerInput.KeyDown(InputType.Down)) { input -= Vector2.UnitY; }
                 if (PlayerInput.KeyDown(InputType.Run))
                 {
-                    SteeringInput += input * deltaTime * 200;
+                    SteeringInput += input * deltaTime * 20;
                     inputCumulation = 0;
                     keyboardInput = Vector2.Zero;
                     unsentChanges = true;
