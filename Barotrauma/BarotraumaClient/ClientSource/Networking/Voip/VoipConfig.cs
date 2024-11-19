@@ -8,7 +8,7 @@ namespace Barotrauma.Networking
         public static OpusEncoder CreateEncoder()
         {
             var encoder = new OpusEncoder(FREQUENCY, 1, OpusApplication.OPUS_APPLICATION_VOIP);
-            encoder.Bandwidth = OpusBandwidth.OPUS_BANDWIDTH_AUTO;
+            encoder.Bandwidth = OpusBandwidth.OPUS_BANDWIDTH_FULLBAND;
             encoder.Bitrate = BITRATE;
             encoder.SignalType = OpusSignal.OPUS_SIGNAL_VOICE;
             return encoder;
