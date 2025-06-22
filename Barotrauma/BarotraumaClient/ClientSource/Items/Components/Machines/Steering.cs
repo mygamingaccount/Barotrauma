@@ -42,6 +42,7 @@ namespace Barotrauma.Items.Components
 
         private Sprite maintainPosIndicator, maintainPosOriginIndicator;
         private Sprite steeringIndicator;
+        private const float SteeringIndicatorLength = 300f;
 
         private List<DockingPort> connectedPorts = new List<DockingPort>();
         private float checkConnectedPortsTimer;
@@ -579,7 +580,7 @@ namespace Barotrauma.Items.Components
 
             if (!AutoPilot)
             {
-                Vector2 steeringInputPos = steeringInput * 2f;
+                Vector2 steeringInputPos = MapSquareToCircle(steeringInput / 100) * SteeringIndicatorLength;
                 steeringInputPos.Y = -steeringInputPos.Y;
                 steeringInputPos += steeringOrigin;
 
@@ -845,7 +846,7 @@ namespace Barotrauma.Items.Components
                     else
                     {
                         if (!PlayerInput.KeyDown(InputType.Crouch))
-                            SteeringInput = inputPos / 2f;
+                            SteeringInput = inputPos / SteeringIndicatorLength * 100f;
                         else
                             SteeringInput = Vector2.Zero;
                     }
